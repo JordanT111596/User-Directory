@@ -10,11 +10,12 @@ function Table() {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
+                                {/* Use these onClicks for sorting later */}
+                                <th scope="col" onClick={clickTest}>#</th>
+                                <th scope="col" onClick={clickTest}>First</th>
+                                <th scope="col" onClick={clickTest}>Last</th>
+                                <th scope="col" onClick={clickTest}>Email</th>
+                                <th scope="col" onClick={clickTest}>Phone</th>
                             </tr>
                         </thead>
                         {users.map(user => (
@@ -32,5 +33,9 @@ function Table() {
         </div>
     )
 }
+
+function clickTest() {
+    console.log("You Clicked!");
+};
 
 export default Table;
