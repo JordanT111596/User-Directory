@@ -4,7 +4,54 @@ import users from "../users.json";
 
 class Table extends React.Component {
     state = {
-        users: users
+        userList: users,
+        sortOrder: ""
+    };
+
+    handleNumSort = (whatToSort) => {
+        let newSort;
+        newSort = this.state.userList.sort((a, b) => {
+            if (this.state.sortOrder === "des") {
+                return a[whatToSort] - b[whatToSort];
+            } else {
+                return b[whatToSort] - a[whatToSort];
+            }
+        });
+        console.log(newSort);
+        const newSortOrder = this.state.sortOrder === "des" ? "asc" : "des";
+        this.setState({ userList: newSort, sortOrder: newSortOrder })
+    };
+
+    handleStringSort = (whatToSort) => {
+        const newSort = this.state.userList.sort((a, b) => {
+            var stringA = a[whatToSort].toUpperCase();
+            var stringB = b[whatToSort].toUpperCase();
+            if (this.state.sortOrder === "des") {
+
+                if (stringA < stringB) {
+                    return -1;
+                }
+                if (stringA > stringB) {
+                    return 1;
+                }
+
+                // strings must be equal
+                return 0;
+            } else {
+                if (stringA < stringB) {
+                    return 1;
+                }
+                if (stringA > stringB) {
+                    return -1;
+                }
+
+                // strings must be equal
+                return 0;
+            }
+        });
+        console.log(newSort);
+        const newSortOrder = this.state.sortOrder === "des" ? "asc" : "des";
+        this.setState({ userList: newSort, sortOrder: newSortOrder })
     };
 
     render() {
@@ -16,17 +63,17 @@ class Table extends React.Component {
                             <thead>
                                 <tr>
                                     {/* Use these onClicks for sorting later */}
-                                    <th scope="col" onClick={clickTest}>#</th>
-                                    <th scope="col" onClick={clickTest}>First</th>
-                                    <th scope="col" onClick={clickTest}>Last</th>
-                                    <th scope="col" onClick={clickTest}>Email</th>
-                                    <th scope="col" onClick={clickTest}>Phone</th>
+                                    <th scope="col" onClick={() => this.handleNumSort("id")}>#</th>
+                                    <th scope="col" onClick={() => this.handleStringSort("firstName")}>First</th>
+                                    <th scope="col" onClick={() => this.handleStringSort("lastName")}>Last</th>
+                                    <th scope="col" onClick={() => this.handleStringSort("email")}>Email</th>
+                                    <th scope="col" onClick={() => this.handleStringSort("phone")}>Phone</th>
                                 </tr>
                             </thead>
-                            {this.state.users.map(user => (
+                            {this.state.userList.map(user => (
                                 <Users
                                     key={user.id}
-                                    id={user.id.toString()}
+                                    id={user.id}
                                     firstName={user.firstName}
                                     lastName={user.lastName}
                                     email={user.email}
@@ -35,13 +82,9 @@ class Table extends React.Component {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
-
-function clickTest() {
-    console.log("You Clicked!");
-};
 
 export default Table;
