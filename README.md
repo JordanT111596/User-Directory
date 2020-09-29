@@ -10,4 +10,4 @@ As specified in the assignment, given a table of random users, when the user loa
 
 This site can be found at https://arcane-waters-87658.herokuapp.com/
 
-![Image of Fitness Tracker](assets/img/Fitness-Tracker-Demo.gif?raw=true "Fitness Tracker")
+![Image of User Directory](assets/img/User-Directory-Demo.gif?raw=true "User Directory")
