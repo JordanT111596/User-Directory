@@ -57,22 +57,19 @@ class Table extends React.Component {
 
     handleInputChange = event => {
         // Getting the value and name of the input which triggered the change
-        this.setState({
-            userList: users
-        });
-        let value = event.target.value || "";
+        let value = event.target.value.toLowerCase() || "";
         console.log(value);
         const name = event.target.name;
-        console.log(name);
         let newFilter;
-        newFilter = this.state.userList.filter((filterUsers) => {
-            return filterUsers.firstName.includes(value) 
+        newFilter = users.filter((filterUsers) => {
+            filterUsers[name] = filterUsers[name].toLowerCase();
+            console.log(filterUsers);
+            return filterUsers[name].includes(value)
         })
-        console.log(newFilter);
         // Updating the input's state
         this.setState({
-          filter: value,
-          userList: newFilter
+            filter: value,
+            userList: newFilter
         });
 
         if (value === "") {
@@ -80,7 +77,7 @@ class Table extends React.Component {
                 userList: users
             });
         }
-      };
+    };
 
     render() {
         return (
@@ -112,14 +109,21 @@ class Table extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-10">
-                        <form className="form" onSubmit={ event => {event.preventDefault() } }>
+                        <form className="form" onSubmit={event => { event.preventDefault() }}>
                             <input
                                 value={this.state.filter}
-                                name="filter"
+                                name="firstName"
                                 onChange={this.handleInputChange}
                                 type="text"
-                                placeholder="Filter..."
+                                placeholder="Filter by first name..."
                             />
+                            {/* <input
+                                value={this.state.filter}
+                                name="lastName"
+                                onChange={this.handleInputChange}
+                                type="text"
+                                placeholder="Filter by last name..."
+                            /> */}
                             {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
                         </form>
                     </div>
