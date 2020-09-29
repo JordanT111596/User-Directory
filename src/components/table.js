@@ -5,7 +5,8 @@ import users from "../users.json";
 class Table extends React.Component {
     state = {
         userList: users,
-        sortOrder: ""
+        sortOrder: "",
+        filter: ""
     };
 
     handleNumSort = (whatToSort) => {
@@ -54,6 +55,33 @@ class Table extends React.Component {
         this.setState({ userList: newSort, sortOrder: newSortOrder })
     };
 
+    handleInputChange = event => {
+        // Getting the value and name of the input which triggered the change
+        this.setState({
+            userList: users
+        });
+        let value = event.target.value || "";
+        console.log(value);
+        const name = event.target.name;
+        console.log(name);
+        let newFilter;
+        newFilter = this.state.userList.filter((filterUsers) => {
+            return filterUsers.firstName.includes(value) 
+        })
+        console.log(newFilter);
+        // Updating the input's state
+        this.setState({
+          filter: value,
+          userList: newFilter
+        });
+
+        if (value === "") {
+            this.setState({
+                userList: users
+            });
+        }
+      };
+
     render() {
         return (
             <div className="container">
@@ -80,6 +108,20 @@ class Table extends React.Component {
                                     phone={user.phone} />
                             ))}
                         </table>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-10">
+                        <form className="form" onSubmit={ event => {event.preventDefault() } }>
+                            <input
+                                value={this.state.filter}
+                                name="filter"
+                                onChange={this.handleInputChange}
+                                type="text"
+                                placeholder="Filter..."
+                            />
+                            {/* <button onClick={this.handleFormSubmit}>Submit</button> */}
+                        </form>
                     </div>
                 </div>
             </div >
