@@ -1,4 +1,4 @@
-# user-directory
+# User-Directory
 Unit 19 React Homework: Employee Directory
 
 Homework 19 by Jordan Triplett
@@ -8,6 +8,6 @@ This assignment has us create an employee directory with React, requiring us to 
 
 As specified in the assignment, given a table of random users, when the user loads the page, a table of employees renders. The user can sort the table by at least one category (all of them), and can filter the users by at least one property (the first name). Now get to organizing those users!
 
-This site can be found at https://arcane-waters-87658.herokuapp.com/
+This site can be found at https://jordant111596.github.io/user-directory/
 
 ![Image of User Directory](assets/img/User-Directory-Demo.gif?raw=true "User Directory")
